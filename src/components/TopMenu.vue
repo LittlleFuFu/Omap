@@ -23,7 +23,7 @@ export default {
   name: 'TopMenu',
   computed: {
     headerClass() {
-      return this.$route.path === '/' ? 'headerContainer' : 'headerContainer withBackground';
+      return this.$route.path === '/123123' ? 'headerContainer' : 'headerContainer withBackground';
     }
   }
 }
