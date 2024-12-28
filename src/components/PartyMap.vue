@@ -57,7 +57,8 @@ export default {
       years.forEach(year => {
         data[year] = usaData.features.map(feature => ({
           name: feature.properties.name, // 区域名称
-          value: feature.properties[`candidatevotes_${year}`], // 每年对应的投票数
+          value: feature.properties[`party_simplified_${year}`], // 每年对应的投票数
+          
           candidate: feature.properties[`candidate_${year}`], // 候选人
           party: feature.properties[`party_simplified_${year}`] // 政党
         }));
@@ -74,9 +75,20 @@ export default {
         tooltip: {
           trigger: 'item',
           formatter: (params) => {
-            const { name, value, candidate, party } = params.data;
-            return `${name}<br />Votes: ${value}<br />Candidate: ${candidate}<br />Party: ${party}`;
-          } // 显示区域名称、候选人、党派和投票数
+            const { name, candidate, party } = params.data;
+            
+            // 根据party的值显示对应政党
+            let partyName = '';
+            if (party === '1') {
+              partyName = 'Democrat';  // 显示民主党
+            } else if (party === '-1') {
+              partyName = 'Republican'; // 显示共和党
+            } else {
+              partyName = 'Other';      // 其他情况显示其他
+            }
+
+            return `${name}<br />Candidate: ${candidate}<br />Party: ${partyName}`;
+          } // 显示区域名称、候选人、党派
         },
         geo: {
           type: 'map',
@@ -85,7 +97,8 @@ export default {
           itemStyle: {
             normal: {
               areaColor: '#eeeeee', // 区域填充颜色
-              borderColor: '#111' // 区域边框颜色
+              borderColor: '#111', // 区域边框颜色
+              borderWidth: 2,
             },
             emphasis: {
               areaColor: '#ffcc33' // 高亮区域颜色
@@ -97,10 +110,10 @@ export default {
           max: maxVotes,
           calculable: true, // 允许拖动调节范围
           inRange: {
-            color: ['#ffffff', '#ff0000'] // 颜色渐变（从白到红）
+            color: ['#d13438', '#0078d4'] // 颜色渐变（从白到红）
           },
           text: ['High', 'Low'], // 可视化图例
-          show: true
+          show: false
         },
         series: [
           {

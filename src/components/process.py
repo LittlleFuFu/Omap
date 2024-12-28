@@ -40,3 +40,5 @@ merged_gdf = gdf.merge(df_pivot, left_on='name_lower', right_on='state_lower', h
 print(merged_gdf.head())
 merged_gdf = merged_gdf.drop(columns=['name_lower', 'state'])
 # %%
+merged_gdf.to_file('./USA.geojson', driver='GeoJSON')
+# %%

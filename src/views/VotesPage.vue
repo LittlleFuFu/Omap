@@ -2,7 +2,8 @@
   <!-- HomePage -->
   <div class="container">
     <TopMenu />
-    <VotesMap />
+    <!-- 将 selectedYear 作为 props 传递给 VotesMap -->
+    <VotesMap :selectedYear="selectedYear" />
     <div id="timeline" style="width: 100%; height: 100px; margin-top: auto;"></div> <!-- 时间轴容器 -->
   </div>
 </template>
@@ -11,11 +12,17 @@
 import TopMenu from '@/components/TopMenu.vue';
 import VotesMap from '@/components/VotesMap.vue';
 import * as echarts from 'echarts';
+
 export default {
-  name: 'TorchRelay',
+  name: 'VotesPage',
   components: {
     TopMenu,
-    VotesMap,
+    VotesMap
+  },
+  data() {
+    return {
+      selectedYear: '1976', // 默认选择1976年
+    };
   },
   mounted() {
     // 初始化时间轴
@@ -72,8 +79,8 @@ export default {
       timeline.on('timelineChanged', (params) => {
         // 获取选中的年份
         const selectedYear = params.currentIndex;
-        // 触发自定义事件，可以在 VotesMap 中根据年份更新数据
-        this.$emit('year-changed', selectedYear);
+        // 更新选中的年份
+        this.selectedYear = ['1976', '1980', '1984', '1988', '1992', '1996', '2000', '2004', '2008', '2012', '2016', '2020'][selectedYear];
       });
     }
   }
