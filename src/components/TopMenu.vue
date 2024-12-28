@@ -3,16 +3,15 @@
     <div class="headerDivContainer">
       <div class="innerContainer">
         <div class="leftGroup">
-          <router-link to="/" class="topButton">
+          <router-link to="/" class="logoContainer">
             <!-- <img src="../assets/emblem-oly.svg" class="logoImg"> -->
-            <!-- <img src="../assets/logo_color.svg" class="logoImg"> -->
-            Online Map for US Elections
+            <img src="../assets/logo_color.svg" class="logoImg">
           </router-link>
-          <router-link class="topButton" to="/">Votes Map</router-link>
-          <router-link class="topButton" to="/PartyPage">Party Map</router-link>
-          <!-- <router-link class="topButton" to="/event-guide">比赛导览</router-link>
+          <router-link class="topButton" to="/">主页</router-link>
+          <router-link class="topButton" to="/torch-relay">火炬传递</router-link>
+          <router-link class="topButton" to="/event-guide">比赛导览</router-link>
           <router-link class="topButton" to="/athlete-page">奥运预选赛</router-link>
-          <router-link class="topButton" to="/olympic-archive">奥运档案馆</router-link> -->
+          <router-link class="topButton" to="/olympic-archive">奥运档案馆</router-link>
         </div>
       </div>
     </div> 
@@ -24,7 +23,7 @@ export default {
   name: 'TopMenu',
   computed: {
     headerClass() {
-      return this.$route.path === '/123123' ? 'headerContainer' : 'headerContainer withBackground';
+      return this.$route.path === '/' ? 'headerContainer' : 'headerContainer withBackground';
     }
   }
 }
@@ -44,7 +43,7 @@ export default {
 }
 
 .withBackground {
-  background-image: url("../assets/background_topmenu.png");
+  background-image: url("../assets/background_topmenu.svg");
 }
 
 .headerDivContainer {
